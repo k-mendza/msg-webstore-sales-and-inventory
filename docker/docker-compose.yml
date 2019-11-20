@@ -8,3 +8,15 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - "5500:5432"
+    networks:
+      - net
+  rabbit:
+    image: "rabbitmq:3.8.2-rc.1-management"
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - net
+networks:
+  net:

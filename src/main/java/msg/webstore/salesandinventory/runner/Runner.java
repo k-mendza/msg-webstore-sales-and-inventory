@@ -16,7 +16,7 @@ public class Runner implements CommandLineRunner {
     private MsgService msgService;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         log.info("Runner started");
         msgService.sendMessage("1");
     }

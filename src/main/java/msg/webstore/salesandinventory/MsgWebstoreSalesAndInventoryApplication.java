@@ -1,5 +1,6 @@
 package msg.webstore.salesandinventory;
 
+import msg.webstore.salesandinventory.listener.MsgListener;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -32,11 +33,17 @@ public class MsgWebstoreSalesAndInventoryApplication {
     }
 
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory) {
+    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(MESSAGE_QUEUE);
+        container.setMessageListener(listenerAdapter);
         return container;
+    }
+
+    @Bean
+    MessageListenerAdapter listenerAdapter(MsgListener receiver) {
+        return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 
     public static void main(String[] args) {

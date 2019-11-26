@@ -18,6 +18,10 @@ public class Runner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         log.info("Runner started");
-        msgService.sendMessage("1");
+        msgService.sendMessage("1", "Kate");
+        msgService.sendMessage("2", "John");
+        msgService.sendMessage("3", "Marry");
+        msgService.sendMessage("4", "Frank");
+        msgService.sendMessage("5", "Steve");
     }
 }

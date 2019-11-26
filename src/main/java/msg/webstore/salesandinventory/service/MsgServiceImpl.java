@@ -22,10 +22,11 @@ public class MsgServiceImpl implements MsgService {
     }
 
     @Override
-    public void sendMessage(String id) {
+    public void sendMessage(String id, String name) {
         Map<String, String> actionMap = new HashMap<>();
         actionMap.put("id", id);
-        log.info("Sending the index request through queue message");
+        actionMap.put("name", name);
+        log.info("Sending through queue message");
         rabbitTemplate.convertAndSend(MsgWebstoreSalesAndInventoryApplication.MESSAGE_QUEUE, actionMap);
     }
 }
